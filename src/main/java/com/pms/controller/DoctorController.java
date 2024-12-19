@@ -32,6 +32,29 @@ public class DoctorController {
 	public ResponseEntity<Doctor> addDoctor(@RequestBody Doctor doctor) {
 		return new ResponseEntity<>(doctorService.addDoctor(doctor), HttpStatus.OK); // 200
 	}
+	@PutMapping("/deactivateDoctor")
+	public ResponseEntity<String> markDoctorAsInactive(@RequestBody Map<String, Integer> requestBody) {
+		int doctorId = requestBody.get("doctorId");
+
+		boolean isUpdated = doctorService.markDoctorAsInactive(doctorId);
+
+		if (isUpdated) {
+			return new ResponseEntity<>("Doctor with ID " + doctorId + " marked as inactive successfully.", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("Doctor with ID " + doctorId + " not found.", HttpStatus.NOT_FOUND);
+		}
+	}
+	@PutMapping("/updateDoctor/{doctorId}")
+	public ResponseEntity<Doctor> updateDoctor(@PathVariable int doctorId, @RequestBody Doctor updatedDoctor) {
+		Doctor doctor = doctorService.updateDoctor(doctorId, updatedDoctor);
+
+		if (doctor != null) {
+			return new ResponseEntity<>(doctor, HttpStatus.OK); // 200 OK
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404 Not Found if doctor doesn't exist
+		}
+	}
+
 
 	// Delete Doctor by ID
 	@DeleteMapping("/deleteDoctor")
