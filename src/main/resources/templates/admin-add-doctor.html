@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,7 +41,7 @@
       transform: scale(1.05);
       background: #45a049;
     }
-    
+
     /* Page-Specific Styles */
     #welcome, #admin-login, #add-doctor {
       display: none;
@@ -120,104 +120,105 @@
   </style>
 </head>
 <body>
-  <!-- Landing Page -->
-  <section id="welcome">
-    <div class="top-buttons">
-      <button onclick="showSection('doctor-login')">Doctor Login</button>
-      <button onclick="showSection('admin-login')">Admin Login</button>
-    </div>
-    <h1>CARE AND CURE</h1>
-    <p>Welcome to Care and Cure. Providing exceptional medical care with compassion and expertise.</p>
-  </section>
+<!-- Landing Page -->
+<section id="welcome">
+  <div class="top-buttons">
+    <button onclick="showSection('doctor-login')">Doctor Login</button>
+    <button onclick="showSection('admin-login')">Admin Login</button>
+    <button onclick="window.location.href='/showDoctors'">Show Doctors</button> <!-- New Button -->
+  </div>
+  <h1>CARE AND CURE</h1>
+  <p>Welcome to Care and Cure. Providing exceptional medical care with compassion and expertise.</p>
+</section>
 
-  <!-- Admin Login Page -->
-  <section id="admin-login">
-    <h1>Admin Login</h1>
-    <form onsubmit="showSection('add-doctor'); return false;">
-      <label for="username">Username</label>
-      <input type="text" id="username" placeholder="Enter Username" required><br>
-      <label for="password">Password</label>
-      <input type="password" id="password" placeholder="Enter Password" required><br>
-      <button type="submit">Login</button>
-    </form>
-  </section>
 
-  <!-- Add Doctor Page -->
-  <!-- Add Doctor Page -->
+<!-- Admin Login Page -->
+<section id="admin-login">
+  <h1>Admin Login</h1>
+  <form onsubmit="showSection('add-doctor'); return false;">
+    <label for="username">Username</label>
+    <input type="text" id="username" placeholder="Enter Username" required><br>
+    <label for="password">Password</label>
+    <input type="password" id="password" placeholder="Enter Password" required><br>
+    <button type="submit">Login</button>
+  </form>
+</section>
+
 <section id="add-doctor">
   <h1>Add Doctor</h1>
   <div class="form-container">
     <h2>Enter Doctor Details</h2>
-    <form>
+    <!-- Thymeleaf Form -->
+    <form th:action="@{/addDoctor}" method="post" th:object="${doctor}">
       <!-- Row 1 -->
       <div class="form-row">
         <div class="form-group">
           <label>Doctor ID:</label>
-          <input type="number" placeholder="Enter Doctor ID" required>
+          <input type="number" th:field="*{doctorId}" placeholder="Enter Doctor ID" required>
         </div>
         <div class="form-group">
           <label>Doctor Name:</label>
-          <input type="text" placeholder="Enter Doctor Name" required>
+          <input type="text" th:field="*{doctorName}" placeholder="Enter Doctor Name" required>
         </div>
       </div>
       <!-- Row 2 -->
       <div class="form-row">
         <div class="form-group">
           <label>Specialization:</label>
-          <input type="text" placeholder="Enter Specialization" required>
+          <input type="text" th:field="*{specialization}" placeholder="Enter Specialization" required>
         </div>
         <div class="form-group">
           <label>Qualification:</label>
-          <input type="text" placeholder="Enter Qualification" required>
+          <input type="text" th:field="*{qualification}" placeholder="Enter Qualification" required>
         </div>
       </div>
       <!-- Row 3 -->
       <div class="form-row">
         <div class="form-group">
           <label>Contact Number:</label>
-          <input type="text" placeholder="Enter Contact Number" required>
+          <input type="text" th:field="*{contactNumber}" placeholder="Enter Contact Number" required>
         </div>
         <div class="form-group">
           <label>Email ID:</label>
-          <input type="email" placeholder="Enter Email ID" required>
+          <input type="email" th:field="*{emailId}" placeholder="Enter Email ID" required>
         </div>
       </div>
       <!-- Row 4 -->
       <div class="form-row">
         <div class="form-group">
           <label>Location:</label>
-          <input type="text" placeholder="Enter Location" required>
+          <input type="text" th:field="*{location}" placeholder="Enter Location" required>
         </div>
         <div class="form-group">
           <label>Consultation Fees:</label>
-          <input type="number" placeholder="Enter Fees" required>
+          <input type="number" th:field="*{consultationFees}" placeholder="Enter Fees" step="0.01" required>
         </div>
       </div>
       <!-- Row 5 -->
       <div class="form-row">
         <div class="form-group">
           <label>Date of Joining:</label>
-          <input type="date" required>
+          <input type="date" th:field="*{dateOfJoining}" required>
         </div>
         <div class="form-group">
           <label>Years of Experience:</label>
-          <input type="number" placeholder="Enter Years of Experience" required>
+          <input type="number" th:field="*{yearsOfExperience}" placeholder="Enter Years of Experience" required>
         </div>
       </div>
       <!-- Row 6 -->
       <div class="form-row">
         <div class="form-group">
           <label>Is Surgeon:</label>
-          <select>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
+          <select th:field="*{surgeon}">
+            <option value="true" th:selected="*{surgeon == true}">Yes</option>
+            <option value="false" th:selected="*{surgeon == false}">No</option>
           </select>
         </div>
         <div class="form-group">
           <label>Status:</label>
-          <select>
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
+          <select th:field="*{status}">
+            <option value="true" th:selected="*{status == true}">Active</option>
+            <option value="false" th:selected="*{status == false}">Inactive</option>
           </select>
         </div>
       </div>
@@ -225,10 +226,10 @@
       <div class="form-row">
         <div class="form-group">
           <label>Gender:</label>
-          <select>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
+          <select th:field="*{gender}">
+            <option value="male" th:selected="*{gender == 'male'}">Male</option>
+            <option value="female" th:selected="*{gender == 'female'}">Female</option>
+            <option value="other" th:selected="*{gender == 'other'}">Other</option>
           </select>
         </div>
       </div>
@@ -236,17 +237,16 @@
     </form>
   </div>
 </section>
-  <!-- JavaScript for Page Navigation -->
-  <script>
-    function showSection(section) {
-      // Hide all sections
-      document.getElementById('welcome').style.display = 'none';
-      document.getElementById('admin-login').style.display = 'none';
-      document.getElementById('add-doctor').style.display = 'none';
+<script>
+  function showSection(section) {
+    // Hide all sections
+    document.getElementById('welcome').style.display = 'none';
+    document.getElementById('admin-login').style.display = 'none';
+    document.getElementById('add-doctor').style.display = 'none';
 
-      // Show selected section
-      document.getElementById(section).style.display = 'flex';
-    }
-  </script>
+    // Show selected section
+    document.getElementById(section).style.display = 'flex';
+  }
+</script>
 </body>
 </html>
