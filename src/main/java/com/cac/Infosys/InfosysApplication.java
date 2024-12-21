@@ -1,4 +1,4 @@
-package com.pms.Infosys;
+package com.cac.Infosys;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.pms") // explicitly specify package for scanning controllers
+@ComponentScan(basePackages = "com.cac") // explicitly specify package for scanning controllers
 //public class InfosysApplication {
 //
 //	public static void main(String[] args) {

@@ -15,6 +15,16 @@
             padding: 8px;
             text-align: left;
         }
+        .disable-button {
+            background-color: #f44336; /* Red color */
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .disable-button:hover {
+            background-color: #e7e7e7;
+        }
     </style>
 </head>
 <body>
@@ -35,6 +45,7 @@
         <th>Qualification</th>
         <th>Surgeon</th>
         <th>Status</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -53,6 +64,12 @@
         <td th:text="${doctor.qualification}"></td>
         <td th:text="${doctor.isSurgeon ? 'Yes' : 'No'}"></td>
         <td th:text="${doctor.status ? 'Active' : 'Inactive'}"></td>
+        <td>
+            <!-- Disable button for each doctor -->
+            <a th:href="@{/disableDoctor/{doctorId}(doctorId=${doctor.doctorId})}">
+                <button class="disable-button">Disable</button>
+            </a>
+        </td>
     </tr>
     </tbody>
 </table>

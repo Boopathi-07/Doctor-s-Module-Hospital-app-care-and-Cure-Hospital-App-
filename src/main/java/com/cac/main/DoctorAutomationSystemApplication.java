@@ -1,13 +1,13 @@
-package com.pms.main;
+package com.cac.main;
 import org.springframework.boot.SpringApplication;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-@EntityScan("com.pms.model")
+@EntityScan("com.cac.model")
 @ComponentScan(basePackages={"com.*"})
-@EnableJpaRepositories("com.pms.repository")
+@EnableJpaRepositories("com.cac.repository")
 @SpringBootApplication
 public class DoctorAutomationSystemApplication {
 

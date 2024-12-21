@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.infosys</groupId>
-	<artifactId>Infosys</artifactId>
+	<artifactId>CareAndCure</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Infosys</name>
 	<description>Demo project for Infosys</description>
