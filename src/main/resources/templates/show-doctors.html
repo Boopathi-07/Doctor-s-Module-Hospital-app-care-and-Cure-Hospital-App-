@@ -1,0 +1,60 @@
+<!-- src/main/resources/templates/show-doctors.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Active Doctors List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<h1>List of Active Doctors</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Doctor ID</th>
+        <th>Doctor Name</th>
+        <th>Specialization</th>
+        <th>Consultation Fees</th>
+        <th>Date of Joining</th>
+        <th>Years of Experience</th>
+        <th>Contact Number</th>
+        <th>Email ID</th>
+        <th>Gender</th>
+        <th>Location</th>
+        <th>Qualification</th>
+        <th>Surgeon</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through the active doctors list and display each doctor's details -->
+    <tr th:each="doctor : ${doctors}">
+        <td th:text="${doctor.doctorId}"></td>
+        <td th:text="${doctor.doctorName}"></td>
+        <td th:text="${doctor.specialization}"></td>
+        <td th:text="${doctor.consultationFees}"></td>
+        <td th:text="${doctor.dateOfJoining}"></td>
+        <td th:text="${doctor.yearsOfExperience}"></td>
+        <td th:text="${doctor.contactNumber}"></td>
+        <td th:text="${doctor.emailId}"></td>
+        <td th:text="${doctor.gender}"></td>
+        <td th:text="${doctor.location}"></td>
+        <td th:text="${doctor.qualification}"></td>
+        <td th:text="${doctor.isSurgeon ? 'Yes' : 'No'}"></td>
+        <td th:text="${doctor.status ? 'Active' : 'Inactive'}"></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
